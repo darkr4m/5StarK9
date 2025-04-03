@@ -15,7 +15,9 @@ Professional dog trainers manage a significant volume of complex and interconnec
 - **Streamline Workflows:** Reduce administrative overhead through efficient data entry, retrieval, and management features.
 - **Enhance Client Service:** Maintain detailed, easily accessible records for personalized training and communication.
 - **Improve Training Outcomes:** Gain better visibility into individual dog progress and the effectiveness of different training plans through structured data collection.
-
+### Primary Competitors
+- [Busy Paws](https://www.busypaws.app/)
+- [Gingr](https://www.gingrapp.com/)
 ## Key Features:
 
 ### **Client Management:** 
