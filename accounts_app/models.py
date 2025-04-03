@@ -1,5 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+from django.core import validators as v
+from .validators import validate_name
 from django.utils.translation import gettext_lazy as _
 
 # Create your models here.
@@ -30,6 +32,7 @@ class User(AbstractUser):
         max_length=100,
         blank=False,
         null=False,
+        validators=[v.MinLengthValidator(2), validate_name],
         help_text="Required. Enter the user's first name (100 characters max)."
     )
     last_name = models.CharField(
@@ -37,6 +40,7 @@ class User(AbstractUser):
         max_length=100,
         blank=False,
         null=False,
+        validators=[v.MinLengthValidator(2), validate_name],
         help_text="Required. Enter the user's last name (100 characters max)."
     )
 
