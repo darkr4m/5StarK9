@@ -103,3 +103,19 @@ Axios (For handling asynchronous HTTP requests between frontend and backend)
 
 **Styling:**\
 React-Bootstrap
+
+## **Third Party API Usage**
+Use at least two 3rd party APIs:
+### Google Calendar API (with OAuth):
+Integrated Appointment Scheduling" feature. Implement functionality to sync the training appointments created in the app to the trainer's Google Calendar. This requires handling Google OAuth for authentication and authorization.
+### Weather API (e.g., OpenWeatherMap): 
+Integrated into the Trainer Dashboard or the Appointment Details view. Fetch the weather forecast for the date and location of upcoming outdoor appointments, helping the trainer prepare.
+### Stripe API
+
+## CRUD-ing resources:
+- [ ] **Clients:** (CRUD)
+- [ ] **Dogs:** (CRUD)
+- [ ] **Training Plans (Templates):** (CRUD)
+- [ ] **Appointments:** (CRUD)
+- [ ] **Session Logs:** (CRU - Delete restricted)
+- [ ] **Skills/Behaviors:** (CRUD)
