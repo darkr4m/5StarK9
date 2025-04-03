@@ -33,7 +33,7 @@ class User(AbstractUser):
         blank=False,
         null=False,
         validators=[v.MinLengthValidator(2), validate_name],
-        help_text="Required. Enter the user's first name (100 characters max)."
+        help_text=_("Required. Enter the user's first name (100 characters max).")
     )
     last_name = models.CharField(
         _('last name'),
@@ -41,7 +41,7 @@ class User(AbstractUser):
         blank=False,
         null=False,
         validators=[v.MinLengthValidator(2), validate_name],
-        help_text="Required. Enter the user's last name (100 characters max)."
+        help_text=_("Required. Enter the user's last name (100 characters max).")
     )
 
     class Types(models.TextChoices):
@@ -52,12 +52,12 @@ class User(AbstractUser):
         :cvar STAFF: Staff user with specific application permissions.
         :cvar ADMIN: Administrator user, typically also a superuser.
         """
-        CLIENT = 'CLIENT', _('Client')
-        STAFF = 'STAFF', _('Staff')
         ADMIN = 'ADMIN', _('Admin')
+        STAFF = 'STAFF', _('Staff')
+        CLIENT = 'CLIENT', _('Client')
 
     user_type = models.CharField(
-        _('Type'),
+        _('User Type'),
         max_length=10,
         choices=Types.choices,
         default=Types.CLIENT,
@@ -68,11 +68,16 @@ class User(AbstractUser):
     # Use 'is_staff_member' for application-specific staff logic/permissions.
     # Admins will have is_staff=True, is_superuser=True, is_staff_member=True.
     # Regular staff will have is_staff_member=True, is_staff=False (if they don't need admin access)
+    is_staff = models.BooleanField(
+        _("Admin Site Access"),
+        default=False,
+        help_text=_("Designates whether the user can log into this admin site."),
+    )
 
     is_staff_member = models.BooleanField(
-        _('staff member status'),
+        _('Staff Member'),
         default=False,
-        help_text=_("Designates whether the user has staff privileges within the application (distinct from Django Admin access).")
+        help_text=_("Designates whether the user is a staff member and has staff privileges within the application (Does NOT grant Admin portal access).")
     )
 
     # Use email as the username field
