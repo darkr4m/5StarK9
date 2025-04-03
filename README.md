@@ -105,12 +105,12 @@ Axios (For handling asynchronous HTTP requests between frontend and backend)
 React-Bootstrap
 
 ## **Third Party API Usage**
-Use at least two 3rd party APIs:
 ### Google Calendar API (with OAuth):
 Integrated Appointment Scheduling" feature. Implement functionality to sync the training appointments created in the app to the trainer's Google Calendar. This requires handling Google OAuth for authentication and authorization.
 ### Weather API (e.g., OpenWeatherMap): 
 Integrated into the Trainer Dashboard or the Appointment Details view. Fetch the weather forecast for the date and location of upcoming outdoor appointments, helping the trainer prepare.
 ### Stripe API
+Integrated Payments (POTENTIAL)
 
 ## CRUD-ing resources:
 - [ ] **Clients:** (CRUD)
@@ -166,3 +166,14 @@ Integrated into the Trainer Dashboard or the Appointment Details view. Fetch the
 - [ ] HTTPS: Ensure your application is served over HTTPS in production.
 - [ ] CSRF Protection: Ensure Django's CSRF protection is correctly configured and handled by `Axios` requests.
 - [ ] Validation: Implement robust input validation on both frontend and backend.
+
+## Models
+This list outlines the Django models needed to support the application's features.
+- [ ] `User` (Custom User auth model) - Trainer/Admin
+- [ ] `ClientProfile` - Represents the dog owner/client and thier profile
+- [ ] `Dog` - Represents the dog being trained - **Relationship:** Many `Dogs` belong to one `Client`. Many `Dogs` are managed by one `User` (Trainer).
+- [ ] `Skill` - Represents a reusable skill or behavior that can be tracked or included in plans -  **Relationship:** Many Skills belong to one `Dog`
+- [ ] `TrainingPlan` - Represents a reusable template for a training plan - **Relationship:** Many `TrainingPlan` belong to one `Dog`. Many-to-Many with `Skill`
+- [ ] `Appointment` - Represents a scheduled training session - Relationship: Many `Appointment` for one `User`, `Client`. Many-to-Many with `Dog`. ForeignKey to `TrainingPlan`
+- [ ] `SessionLog` - Records the details and progress from a completed training session - **Relationship:** One `SessionLog` per `Appointment`. Many `SessionLog` belong to one `User`/`Dog`
+
