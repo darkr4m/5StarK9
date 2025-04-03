@@ -18,18 +18,26 @@ class User(AbstractUser):
     :ivar is_staff_member: Flag indicating application-specific staff privileges,
                            distinct from Django admin access (`is_staff`).
     :vartype is_staff_member: models.BooleanField
-
-    .. note::
-        The standard `username` field from `AbstractUser` is removed in favor of `email`.
-        The `is_staff` field controls access to the Django Admin interface.
-        The `is_superuser` field grants all permissions without explicit assignment.
-    """
-    
+    """ 
     email = models.EmailField(
         _('email address'),
         max_length=255,
         unique=True,
         help_text=_("Required. Unique email address for the user. Serves as the username for logging in.")
+    )
+    first_name = models.CharField(
+        _('first name'),
+        max_length=100,
+        blank=False,
+        null=False,
+        help_text="Required. Enter the user's first name (100 characters max)."
+    )
+    last_name = models.CharField(
+        _('last name'),
+        max_length=100,
+        blank=False,
+        null=False,
+        help_text="Required. Enter the user's last name (100 characters max)."
     )
 
     class Types(models.TextChoices):
