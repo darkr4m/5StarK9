@@ -125,8 +125,8 @@ Integrated Payments (POTENTIAL)
 ## User Authentication (Django/React)
 
 ### Backend (Django & Django REST Framework - DRF)
-- [x] **Configure Django auth App**
-- [x] **Install/Configure DRF & Auth Packages**
+- [x] ~~**Configure Django auth App**~~
+- [x] ~~**Install/Configure DRF & Auth Packages**~~
 - [ ] **Custom User Model** inheriting from AbstractUser with a `One-to-One` linked `ClientProfile` model.
 - [ ] **Run migrations** (`python manage.py migrate`) to create necessary auth tables
 - [ ] **Choose Authentication Strategy:** DRF's built-in `TokenAuthentication` vs JWT library `djangorestframework-simplejwt`
