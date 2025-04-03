@@ -119,3 +119,50 @@ Integrated into the Trainer Dashboard or the Appointment Details view. Fetch the
 - [ ] **Appointments:** (CRUD)
 - [ ] **Session Logs:** (CRU - Delete restricted)
 - [ ] **Skills/Behaviors:** (CRUD)
+
+## User Authentication (Django/React)
+
+### Backend (Django & Django REST Framework - DRF)
+- [x] **Configure Django auth App**
+- [x] **Install/Configure DRF & Auth Packages**
+- [ ] **Custom User Model** inheriting from AbstractUser with a `One-to-One` linked `ClientProfile` model.
+- [ ] **Run migrations** (`python manage.py migrate`) to create necessary auth tables
+- [ ] **Choose Authentication Strategy:** DRF's built-in `TokenAuthentication` vs JWT library `djangorestframework-simplejwt`
+- [ ] **Create API Endpoints**
+  - [ ] **Registration:** (`/api/v1/auth/register/`)
+  - [ ] **Login:** (`/api/v1/auth/login/`)
+  - [ ] **Get Current User:** (`/api/v1/auth/user/`) Requires authentication and returns the details of the currently logged-in user
+  - [ ] **Logout:** (`/api/v1/auth/logout/`).
+- [ ] **Create Views**
+- [ ] **Create Serializers**
+- [ ] **Define URL Patterns**
+- [ ] **Set Permissions:** Ensure sensitive API endpoints (client data, dog profiles) require authentication using DRF's permission classes (`IsAuthenticated`). `Registration` and `Login` endpoints should be accessible without authentication.
+
+### Frontend (React)
+
+- [ ] **Install Libraries:**
+  - `axios` for API calls
+  - `react-router-dom` for routing
+- [ ] Create Authentication Service/Module
+- [ ] **Implement State Management:** React Context API to manage global authentication state (`isAuthenticated`, `user`, `token`).
+- [ ] Create functions to interact with the backend API endpoints (`register(userData)`, `login(credentials)`, `logout()`, `getCurrentUser()`)
+- [ ] Create UI Components:
+  - [ ] `RegistrationForm.js`: Form with fields for username, email, password, password confirmation. Calls the register service function.
+  - [ ] `LoginForm.js`: Form with fields for username/email and password. Calls the login service function. On success, updates auth state and stores the token.
+  - [ ] `LogoutButton.js`: Button that calls the logout service function, clears auth state, and removes the token.
+- [ ] **Token Handling:** Upon successful login, store the received token securely (`localStorage`).
+- [ ] Configure `Axios` to automatically include the token in the `Authorization` header for subsequent requests (`axios.defaults.headers.common['Authorization'] = 'Token ' + token;`).
+- [ ] Clear the token upon logout.
+- [ ] Implement Protected Routes: Create a ProtectedRoute component that checks the authentication state.
+ - If authenticated, render the requested component.
+ - If not authenticated, redirect the user to the /login page.
+- [ ] Wrap sensitive routes (Dashboard, Client list, etc.) in ProtectedRoute.
+- [ ] Update App Structure: Set up routes using react-router-dom for `login`, `registration`, `dashboard`, and other protected areas.
+- [ ] Include Login/Registration forms on public routes.
+- [ ] Include Logout button in the main layout for authenticated users.
+- [ ] Attempt to fetch the current user on app load if a token exists in storage to maintain login state across page refreshes.
+
+### General & Security
+- [ ] HTTPS: Ensure your application is served over HTTPS in production.
+- [ ] CSRF Protection: Ensure Django's CSRF protection is correctly configured and handled by `Axios` requests.
+- [ ] Validation: Implement robust input validation on both frontend and backend.
