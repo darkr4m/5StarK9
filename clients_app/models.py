@@ -1,8 +1,11 @@
 from django.db import models
+from django.core import validators as v
+from ..accounts_app.validators import validate_name
+from django.utils.translation import gettext_lazy as _
 
 # Create your models here.
 class ClientProfile(models.Model):
-    first_name = models.CharField()
+    first_name = models.CharField(validators=[validate_name])
     last_name = models.CharField()
     email = models.EmailField()
     phone_number = models.CharField()
@@ -18,8 +21,8 @@ class ClientProfile(models.Model):
     updated_at = models.DateTimeField()
 
     class Meta:
-        verbose_name = "Client"
-        verbose_name_plural = "Clients"
+        verbose_name = _("Client")
+        verbose_name_plural = _("Clients")
         ordering = ['last_name', 'first_name']
 
     def get_full_name(self):

@@ -1,15 +1,16 @@
 # Client Profile
 
 ## Description
+
 **Appplication:** `clients_app`\
 **Class:** `ClientProfile(models.Model)` - Represents a client (dog owner) in the system.\
 This model stores essential contact information and tracking details about their services received.
 
 ## Fields
 
-| Field                      | Type            |  Constraints | Validation | Description / Help Text | Verbose Names |
-| -------------------------- | --------------- | ------------- | ----------- | ---------- | ----------------------- |
-| `id`                       | `AutoField`     |               |
+| Field                      | Type            | Constraints | Validation | Description / Help Text | Verbose Names |
+| -------------------------- | --------------- | ----------- | ---------- | ----------------------- | ------------- |
+| `id`                       | `AutoField`     |             |
 | `first_name`               | `CharField`     |
 | `last_name`                | `CharField`     |
 | `email`                    | `EmailField`    |
@@ -32,7 +33,9 @@ This model stores essential contact information and tracking details about their
 ## Serializers
 
 ## String Representation
+
 `first_name` `last_name` (**"Keith Hiamond"**)
+
 ## Methods
 
 - `get_full_name(self)` - Returns the client's full name: `first_name` `last_name` (**"Keith Hiamond"**)
