@@ -94,17 +94,29 @@ Python / Django (Utilizing its ORM, admin interface, and security features)
 **API:**\
 Django REST Framework (For building a clean, well-documented RESTful API)
 
-**Frontend Library:**\
-JavaScript / React (For creating a dynamic, interactive, and component-based user interface)
+**Authentication:**\
+JSON Web tokens via `djangorestframework-simplejwt`\
+Google OAuth
 
 **Database:**\
 PostgreSQL (A robust relational database suitable for structured data)
+
+**Frontend Library:**\
+JavaScript / React (For creating a dynamic, interactive, and component-based user interface)
 
 **API Communication:**\
 Axios (For handling asynchronous HTTP requests between frontend and backend)
 
 **Styling:**\
 React-Bootstrap
+
+## **Authentication Strategy**
+To ensure robust protection of customer data, including sensitive information like email addresses, and to align with stringent compliance standards such as GDPR and ISO 27001, this product employs **JSON Web Tokens (JWTs)** for API authentication in place of standard Django Rest Framework (DRF) tokens. Unlike basic DRF tokens which are opaque strings requiring a database lookup for validation on each request, **JWTs offer significant advantages:** 
+- Self-contained, carrying claims (user identity and permissions) and a mandatory expiration timestamp (exp claim) within a cryptographically signed structure. This stateless nature 
+- Reduces database load and potential attack vectors associated with constant database interaction for token validation
+- The built-in, verifiable expiration mechanism directly supports security best practices and compliance mandates:
+  - `GDPR`'s principle of storage limitation and `ISO 27001 A.9 Access Control` concerning session timeouts by enforcing limited lifetimes for access credentials, mitigating risks associated with indefinitely valid tokens
+- The cryptographic signature ensures the integrity of the token, preventing tampering and confirming the authenticity of the claims, thereby providing a more secure, manageable, and compliant method for controlling access to protected resources and customer data.
 
 ## **Third Party API Usage**
 ### Google Calendar API (with OAuth):
@@ -129,7 +141,7 @@ Integrated Payments (POTENTIAL)
 - [x] ~~**Install/Configure DRF & Auth Packages**~~
 - [ ] **Custom User Model** inheriting from AbstractUser with a `One-to-One` linked `ClientProfile` model.
 - [ ] **Run migrations** (`python manage.py migrate`) to create necessary auth tables
-- [ ] **Choose Authentication Strategy:** DRF's built-in `TokenAuthentication` vs JWT library `djangorestframework-simplejwt`
+- [x] ~~**Choose Authentication Strategy:** JWT library `djangorestframework-simplejwt`~~
 - [ ] **Create API Endpoints**
   - [ ] **Registration:** (`/api/v1/auth/register/`)
   - [ ] **Login:** (`/api/v1/auth/login/`)
@@ -153,7 +165,7 @@ Integrated Payments (POTENTIAL)
   - [ ] `LoginForm.js`: Form with fields for username/email and password. Calls the login service function. On success, updates auth state and stores the token.
   - [ ] `LogoutButton.js`: Button that calls the logout service function, clears auth state, and removes the token.
 - [ ] **Token Handling:** Upon successful login, store the received token securely (`localStorage`).
-- [ ] Configure `Axios` to automatically include the token in the `Authorization` header for subsequent requests (`axios.defaults.headers.common['Authorization'] = 'Token ' + token;`).
+- [ ] Configure `Axios` to automatically include the token in the `Authorization` header for subsequent requests (`axios.defaults.headers.common['Authorization'] = 'Bearer ' + token;`).
 - [ ] Clear the token upon logout.
 - [ ] Implement Protected Routes: Create a ProtectedRoute component that checks the authentication state.
  - If authenticated, render the requested component.
@@ -176,6 +188,6 @@ This list outlines the Django models needed to support the application's feature
 - [ ] `Dog` - Represents the dog being trained - **Relationship:** Many `Dogs` belong to one `Client`. Many `Dogs` are managed by one `User` (Trainer).
 - [ ] `Skill` - Represents a reusable skill or behavior that can be tracked or included in plans -  **Relationship:** Many Skills belong to one `Dog`
 - [ ] `TrainingPlan` - Represents a reusable template for a training plan - **Relationship:** Many `TrainingPlan` belong to one `Dog`. Many-to-Many with `Skill`
-- [ ] `Appointment` - Represents a scheduled training session - Relationship: Many `Appointment` for one `User`, `Client`. Many-to-Many with `Dog`. ForeignKey to `TrainingPlan`
+- [ ] `Appointment` - Represents a scheduled training session - **Relationship:** Many `Appointment` for one `User`, `Client`. Many-to-Many with `Dog`. ForeignKey to `TrainingPlan`
 - [ ] `SessionLog` - Records the details and progress from a completed training session - **Relationship:** One `SessionLog` per `Appointment`. Many `SessionLog` belong to one `User`/`Dog`
 
